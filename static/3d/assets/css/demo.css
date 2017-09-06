@@ -1,0 +1,10 @@
+#goodBox{
+    position: fixed;
+    top:0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    background:url('../image/page/nianhui/screen/bg.png') center;
+    background-size: 100% 100%;
+    z-index: 99999;
+}

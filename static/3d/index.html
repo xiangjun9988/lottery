@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html>
-<script type="text/javascript">
-if(window.parent.frames[0]){window.parent.location.replace(location.href);}
-</script>
 <head>
 <!-- Original URL: http://screen.weijuju.com/meeting_screen/sign-3d.jsp?aidStr=1b31uqrIATU%253D
 Date Downloaded: 2017/9/5 11:32:54 !-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<title>会议主题——3D签到</title>
+<title>网络营销—学院利好</title>
 <link rel="stylesheet" href="assets/css/page/nianhui/screen/common.css" />
 <link rel="stylesheet" href="assets/css/page/nianhui/3d/lightbox.css" />
 <link rel="stylesheet" href="assets/css/page/nianhui/3d/style.css" />
 <script type="text/javascript" src="assets/js/page/meeting/3d/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
-window.signEffect = {"sphere":true};
+window.signEffect = {"sphere":true,'all':true};
 if(window.signEffect.all){
-	window.signEffect = {"grid":true,"helix":true,"grid":true,"table":true};
+	window.signEffect = {"sphere":true,"helix":true,"grid":true,"table":true};
 	setInterval(function(){
 		targetIndex++;
 		if(targetIndex >=4){
@@ -28,10 +25,8 @@ if(window.signEffect.all){
 				transform( targets[tt], 2000 );
 			}
 		}
-	},30000);
+	},10000);
 }
-
-
 
 function getFiles(){
 	var html = $.ajax({
@@ -40,38 +35,15 @@ function getFiles(){
 	}).responseText; 
 	return JSON.parse(html);
 }
-// $.get('./data/data.json',function(res){
-// 	console.log(res);
-// })
-var arrfiles = getFiles();
+// var arrfiles = getFiles();
+var arrfiles = []
 
 while(arrfiles.length < 186){
-	arrfiles.push({"head":"assets/image/page/nianhui/screen/3d_default.jpg","nickname":"会议用户","isEmpty":true});
+	arrfiles.push({"head":"assets/image/page/nianhui/screen/3d_default.jpg","nickname":"网络营销-用户","isEmpty":true});
 }
-var platform={
-	// staticUrl:'http://static.resource.youyu.weijuju.com/'
-}
-var aidStr='1b31uqrIATU%253D';
 </script>
 </head>
-<body style="background:url('assets/image/page/nianhui/screen/bg.png') center;background-size: 100% 100%;-webkit-user-select:none;-moz-user-select:none; -ms-user-select:none;user-select:none;">
-<a title="返回会议签到墙" style="position: absolute;bottom: 50px;left: 55px;z-index: 11;" href="index_486698ac.jsp.html"><img alt="" src="assets/image/page/nianhui/screen/btn_return.png" style="display: block;" /> </a>
-<script type="text/javascript">
-//判断浏览器类型
-var Sys={};
-  var ua=navigator.userAgent.toLowerCase();
-  var s;
-  (s=ua.match(/msie ([\d.]+)/))?Sys.ie=s[1]:
-  (s=ua.match(/firefox\/([\d.]+)/))?Sys.firefox=s[1]:
-  (s=ua.match(/chrome\/([\d.]+)/))?Sys.chrome=s[1]:
-  (s=ua.match(/opera.([\d.]+)/))?Sys.opera=s[1]:
-  (s=ua.match(/micromessenger.([\d.]+)/))?Sys.micromessenger=s[1]:
-  (s=ua.match(/version\/([\d.]+).*safari/))?Sys.safari=s[1]:0;
-  if(!(Sys.chrome || Sys.firefox || Sys.safari || Sys.micromessenger)){//Js判断为谷歌chrome、火狐firefox浏览器、苹果safari
-	  document.write('</br><font size="1" color="white">查看3D效果请使用：谷歌chrome、火狐firefox，苹果safari或微信</font>');
-  }
-
-</script>
+<body style="background:url('assets/image/page/nianhui/screen/bg.png') center;background-size: 100% 100%;">
 <div class="container" id="container">
 	<div class="btn_menu" style="display: none;">
 		<button id="table">照片墙</button>
@@ -80,11 +52,6 @@ var Sys={};
 		<button id="grid">展览厅</button>
 	</div>
 </div>
-
-<script type="text/javascript">
-	
-
-</script>
 
 <script type="text/javascript" src="assets/js/page/meeting/3d/lightbox-2.6.min.js"></script>
 <script type="text/javascript" src="assets/js/page/meeting/3d/three.min.js"></script>
@@ -143,7 +110,7 @@ var Sys={};
 		setInterval(function(){
 			if(stop) return;
 			stop = true;
-			$.get('./data/getSign.json', {aidStr:aidStr,lastTotal:getLastTotal()},function(data) {
+			$.get('./data/getSign.json',function(data) {
 				if(data.ret==0){
 					var total=data.model.total;
 					var record=data.model.record;

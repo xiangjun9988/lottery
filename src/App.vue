@@ -4,18 +4,15 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <a class="navbar-brand" href="#">抽奖系统</a>
         <ul class="nav navbar-nav">
-            <li class="active">
-                <a href="#">首页</a>
+            <router-link to="/" tag="li"><a href="#">首页</a></router-link>
+            <router-link to="/good" tag="li"><a href="#">学院喜报</a></router-link>
+             <li class="active">
+                <a href="#">参与抽奖者</a>
             </li>
             <li>
                 <a href="#">中奖名单</a>
             </li>
-             <li>
-                <a href="#">参与抽奖者</a>
-            </li>
-            <li>
-                <a href="#">学院喜报</a>
-            </li>
+            
         </ul>
         <div class="btn-group pull-right bw-r">
           <button type="button" class="btn btn-default">抽奖报名</button>
