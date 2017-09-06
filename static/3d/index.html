@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript">
+if(window.parent.frames[0]){window.parent.location.replace(location.href);}
+</script>
+<head>
+<!-- Original URL: http://screen.weijuju.com/meeting_screen/sign-3d.jsp?aidStr=1b31uqrIATU%253D
+Date Downloaded: 2017/9/5 11:32:54 !-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>会议主题——3D签到</title>
+<link rel="stylesheet" href="assets/css/page/nianhui/screen/common.css" />
+<link rel="stylesheet" href="assets/css/page/nianhui/3d/lightbox.css" />
+<link rel="stylesheet" href="assets/css/page/nianhui/3d/style.css" />
+<script type="text/javascript" src="assets/js/page/meeting/3d/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+window.signEffect = {"sphere":true};
+if(window.signEffect.all){
+	window.signEffect = {"grid":true,"helix":true,"grid":true,"table":true};
+	setInterval(function(){
+		targetIndex++;
+		if(targetIndex >=4){
+			targetIndex = 0;
+		}
+		var i=0;
+		for(tt in targets){
+			if(i++ == targetIndex){
+				transform( targets[tt], 2000 );
+			}
+		}
+	},30000);
+}
+
+
+
+function getFiles(){
+	var html = $.ajax({
+	  url: "./data/data.json",
+	  async: false
+	}).responseText; 
+	return JSON.parse(html);
+}
+// $.get('./data/data.json',function(res){
+// 	console.log(res);
+// })
+var arrfiles = getFiles();
+
+while(arrfiles.length < 186){
+	arrfiles.push({"head":"assets/image/page/nianhui/screen/3d_default.jpg","nickname":"会议用户","isEmpty":true});
+}
+var platform={
+	// staticUrl:'http://static.resource.youyu.weijuju.com/'
+}
+var aidStr='1b31uqrIATU%253D';
+</script>
+</head>
+<body style="background:url('assets/image/page/nianhui/screen/bg.png') center;background-size: 100% 100%;-webkit-user-select:none;-moz-user-select:none; -ms-user-select:none;user-select:none;">
+<a title="返回会议签到墙" style="position: absolute;bottom: 50px;left: 55px;z-index: 11;" href="index_486698ac.jsp.html"><img alt="" src="assets/image/page/nianhui/screen/btn_return.png" style="display: block;" /> </a>
+<script type="text/javascript">
+//判断浏览器类型
+var Sys={};
+  var ua=navigator.userAgent.toLowerCase();
+  var s;
+  (s=ua.match(/msie ([\d.]+)/))?Sys.ie=s[1]:
+  (s=ua.match(/firefox\/([\d.]+)/))?Sys.firefox=s[1]:
+  (s=ua.match(/chrome\/([\d.]+)/))?Sys.chrome=s[1]:
+  (s=ua.match(/opera.([\d.]+)/))?Sys.opera=s[1]:
+  (s=ua.match(/micromessenger.([\d.]+)/))?Sys.micromessenger=s[1]:
+  (s=ua.match(/version\/([\d.]+).*safari/))?Sys.safari=s[1]:0;
+  if(!(Sys.chrome || Sys.firefox || Sys.safari || Sys.micromessenger)){//Js判断为谷歌chrome、火狐firefox浏览器、苹果safari
+	  document.write('</br><font size="1" color="white">查看3D效果请使用：谷歌chrome、火狐firefox，苹果safari或微信</font>');
+  }
+
+</script>
+<div class="container" id="container">
+	<div class="btn_menu" style="display: none;">
+		<button id="table">照片墙</button>
+		<button id="sphere">水晶球</button>
+		<button id="helix">螺旋塔</button>
+		<button id="grid">展览厅</button>
+	</div>
+</div>
+
+<script type="text/javascript">
+	
+
+</script>
+
+<script type="text/javascript" src="assets/js/page/meeting/3d/lightbox-2.6.min.js"></script>
+<script type="text/javascript" src="assets/js/page/meeting/3d/three.min.js"></script>
+<script type="text/javascript" src="assets/js/page/meeting/3d/tween.min.js"></script>
+<script type="text/javascript" src="assets/js/page/meeting/3d/TrackballControls.js"></script>
+<script type="text/javascript" src="assets/js/page/meeting/3d/CSS3DRenderer.js"></script>
+<script type="text/javascript" src="assets/js/page/meeting/3d/3d-sign.js"></script>
+<script type="text/javascript">
+	window.isAnimating = false;
+	window.overLimit = true;
+	window.limitSize = 2567;
+	window.wallLimit = 186;
+	function getLastTotal(){
+		var result = arrfiles.length;
+		for(var i=0;i<arrfiles.length;i++){
+			if(arrfiles[i].isEmpty) {
+				result = i;
+				break;
+			}
+		}
+		if(window.overLimit){
+			result = arrfiles.length + limitSize;
+		}
+		return result;
+	}
+	function animHead(index){
+		window.isAnimating = true;
+		var $element = $(objects[index].element);
+		var objData = arrfiles[index];
+		if(objData.isNeedAnimate){
+			$element.find(">a").click();
+			setTimeout(function(){
+				$(".lightboxOverlay").click();
+				var newSrc = $element.find(">a>img").attr("data-newsrc");
+				$element.find(">a>img").attr("src",newSrc);
+				$element.find(">a").addClass("a-ring");
+				objData.isNeedAnimate = false;
+				var nextIndex = index+1;
+				if(nextIndex>=arrfiles.length){
+					nextIndex = 0;
+				}
+				var nextObj = arrfiles[nextIndex];
+				if(nextObj.isNeedAnimate){
+					setTimeout(function(){
+						animHead(index+1);
+					},1200);
+				} else {
+					window.isAnimating = false;
+				}
+			},2500);
+		}
+	}
+	$(function(){
+		//定时轮询后台签到信息
+		var stop=false
+		setInterval(function(){
+			if(stop) return;
+			stop = true;
+			$.get('./data/getSign.json', {aidStr:aidStr,lastTotal:getLastTotal()},function(data) {
+				if(data.ret==0){
+					var total=data.model.total;
+					var record=data.model.record;
+					var o_lastTotal = getLastTotal();
+					var animateIndex = getLastTotal()%window.wallLimit;
+					for(var i=0;i<record.length;i++){
+						var r=record[i];
+						var lastTotal = getLastTotal()%window.wallLimit;
+						arrfiles[lastTotal].isEmpty = false;
+						arrfiles[lastTotal].isNeedAnimate = true;
+						var $element = $(objects[lastTotal].element);
+						var headImgUrl = r.head?r.head:(platform.staticUrl+'/image/page/nianhui/screen/default.png');
+						var bigImg = headImgUrl;
+						// if(headImgUrl.endsWith("/132")){
+						// 	bigImg = headImgUrl.substring(0,headImgUrl.lastIndexOf("/"))+"/0";
+						// }
+						var image = $element.find(">a>img")[0];
+						image.addEventListener('load',function(event)
+						{
+							resizeImg(this,120,120);
+						},false);
+						$element.find(">a").attr("href",bigImg).attr("title",r.nickname).append("<img src='"+headImgUrl+"' style='display:none;'/>");
+						$element.find(">a>img").attr("data-newsrc",headImgUrl);
+					}
+					if(!window.isAnimating && record.length>0){
+						animHead(animateIndex);
+					}
+					if(window.overLimit){
+						window.limitSize += record.length;
+					} else if((record.length + o_lastTotal)>window.wallLimit){
+						window.overLimit = true;
+						window.limitSize = (record.length + o_lastTotal)-wallLimit;
+					}
+				}
+				stop = false;
+			},"json");
+		},5000);
+	});
+</script>
+</body>
+</html>
