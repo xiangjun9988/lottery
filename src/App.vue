@@ -5,8 +5,8 @@
         <a class="navbar-brand" href="#">抽奖系统</a>
         <ul class="nav navbar-nav">
             <router-link to="/" tag="li"><a href="#">首页</a></router-link>
-            <router-link to="/good" tag="li"><a href="#">学院喜报</a></router-link>
-             <li class="active">
+            <router-link  class="active" to="/good" tag="li"><a href="#">学院喜报</a></router-link>
+             <li>
                 <a href="#">参与抽奖者</a>
             </li>
             <li>

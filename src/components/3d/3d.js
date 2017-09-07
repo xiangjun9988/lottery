@@ -251,7 +251,7 @@ if (typeof String.prototype.endsWith != "function") {
         }
       }
     };
-  
+    //入口函数
     function start(arr){
         arrfiles = arr;
         getImgs();

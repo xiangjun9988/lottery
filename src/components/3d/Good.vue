@@ -14,23 +14,22 @@
 <script>
 import DxObj from './3d';
 
-console.log(DxObj);
 export default {
     mounted() {
         this._3dStart();
     },
     methods: {
-        _3dStart() {
+        _getData(){
             // 获取护具
-            function getFiles() {
-                var html = $.ajax({
-                    url: "/static/3d/data/data.json",
-                    async: false
-                }).responseText;
-                return JSON.parse(html);
-            }
-            // var arrfiles = getFiles();
-            var arrfiles = []
+            var html = $.ajax({
+                url: "/static/3d/data/data.json",
+                async: false
+            }).responseText;
+            return JSON.parse(html);
+        },
+        _3dStart() {
+            var arrfiles = this._getData() || [];
+            //模拟假数据
             while (arrfiles.length < 186) {
                 arrfiles.push({ "head": "/static/3d/assets/image/page/nianhui/screen/3d_default.jpg", "nickname": "网络营销-用户", "isEmpty": true });
             }
